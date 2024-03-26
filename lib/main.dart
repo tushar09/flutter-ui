@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:ui' as ui;
 
 void main() async {
   runApp(const MyApp());
@@ -84,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     controller2 = AnimationController(
       vsync: this,
       duration: Duration(
-        seconds: 5,
+        seconds: 1,
       ),
     );
     animation3 = Tween<double>(begin: .41, end: .38).animate(CurvedAnimation(
@@ -170,10 +171,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   painter: MyPainter(animation4.value),
                 ),
               ),
+              BackdropFilter(
+                filter: ui.ImageFilter.blur(
+                  sigmaX: 10.0,
+                  sigmaY: 10.0,
+                ),
+                child: Container(
+                  color: Colors.transparent,
+                ),
+              ),
               Column(
                 children: [
                   Expanded(
-                    flex: 5,
+                    flex: 4,
                     child: Padding(
                       padding: EdgeInsets.only(top: size.height * .1),
                       child: Text(
@@ -189,45 +199,151 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     ),
                   ),
                   Expanded(
-                    flex: 7,
+                    flex: 10,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        component1(Icons.account_circle_outlined,
-                            'User name...', false, false),
-                        component1(
-                            Icons.email_outlined, 'Email...', false, true),
-                        component1(
-                            Icons.lock_outline, 'Password...', true, false),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            component2(
-                              'LOGIN',
-                              2.58,
-                                  () {
-                                HapticFeedback.lightImpact();
-                                // Fluttertoast.showToast(
-                                //     msg: 'Login button pressed');
-                              },
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32.0, 0, 32, 0),
+                          child: TextField(
+                            style: TextStyle(color: Colors.white.withOpacity(1)),
+                            cursorColor: Colors.white,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              fillColor: Colors.greenAccent.withOpacity(.30),
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xff2E8B57)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xff2E8B57)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.account_circle_outlined,
+                                color: Colors.white.withOpacity(.7),
+                              ),
+                              border: InputBorder.none,
+                              hintMaxLines: 1,
+                              hintText: 'User name...',
+                              hintStyle:
+                              TextStyle(fontSize: 14, color: Colors.white.withOpacity(.5)),
                             ),
-                            SizedBox(width: size.width / 20),
-                            component2(
-                              'Forgotten password!',
-                              2.58,
-                                  () {
-                                HapticFeedback.lightImpact();
-                                // Fluttertoast.showToast(
-                                //     msg: 'Forgotten password button pressed');
-                              },
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32.0, 16, 32, 0),
+                          child: TextField(
+                            style: TextStyle(color: Colors.white.withOpacity(1)),
+                            cursorColor: Colors.white,
+                            obscureText: false,
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: InputDecoration(
+                              fillColor: Colors.greenAccent.withOpacity(.30),
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xff2E8B57)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xff2E8B57)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.email_outlined,
+                                color: Colors.white.withOpacity(.7),
+                              ),
+                              border: InputBorder.none,
+                              hintMaxLines: 1,
+                              hintText: 'Email...',
+                              hintStyle:
+                              TextStyle(fontSize: 14, color: Colors.white.withOpacity(.5)),
                             ),
-                          ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32.0, 16, 32, 0),
+                          child: TextField(
+                            style: TextStyle(color: Colors.white.withOpacity(1)),
+                            cursorColor: Colors.white,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              fillColor: Colors.greenAccent.withOpacity(.30),
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xff2E8B57)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Color(0xff2E8B57)),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.lock_outline,
+                                color: Colors.white.withOpacity(.7),
+                              ),
+                              border: InputBorder.none,
+                              hintMaxLines: 1,
+                              hintText: 'Password...',
+                              hintStyle:
+                              TextStyle(fontSize: 14, color: Colors.white.withOpacity(.5)),
+                            ),
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: OutlinedButton(
+                                  onPressed: () {
+
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    minimumSize: Size.fromHeight(60),
+                                    backgroundColor: Colors.greenAccent.withOpacity(.30),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    side: BorderSide(width: 1.0, color: Color(0xff2E8B57)),
+                                  ),
+                                  child: const Text('LOGIN', style: TextStyle(color: Colors.white)),
+                                ),
+                              ),
+
+                              SizedBox(width: size.width / 20),
+
+                              Expanded(
+                                flex: 4,
+                                child: OutlinedButton(
+                                  onPressed: () {
+
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    minimumSize: Size.fromHeight(60),
+                                    backgroundColor: Colors.greenAccent.withOpacity(.30),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    side: BorderSide(width: 1.0, color: Color(0xff2E8B57)),
+                                  ),
+                                  child: const Text('Forgot Password', style: TextStyle(color: Colors.white)),
+                                ),
+                              ),
+
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                   Expanded(
-                    flex: 6,
+                    flex: 3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
