@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     controller1 = AnimationController(
       vsync: this,
       duration: Duration(
-        seconds: 5,
+        seconds: 1,
       ),
     );
     animation1 = Tween<double>(begin: .1, end: .15).animate(
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           controller1.forward();
         }
       });
-    animation2 = Tween<double>(begin: .02, end: .04).animate(
+    animation2 = Tween<double>(begin: -0.10, end: .04).animate(
       CurvedAnimation(
         parent: controller1,
         curve: Curves.easeInOut,
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     controller2 = AnimationController(
       vsync: this,
       duration: Duration(
-        seconds: 1,
+        seconds: 2,
       ),
     );
     animation3 = Tween<double>(begin: .41, end: .38).animate(CurvedAnimation(
